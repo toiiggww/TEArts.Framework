@@ -3,7 +3,7 @@ using System.Configuration;
 using System.IO;
 using System.Linq;
 
-namespace TEArts.Etc.CollectionLibrary
+namespace TEArts.Framework.Config
 {
     public class JsonConfigService
     {

@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 
-namespace MQTT.Common
+namespace TEArts.Framework.Config
 {
     public class AppConfigService
     {
@@ -52,6 +53,7 @@ namespace MQTT.Common
                 }
                 configuration.AppSettings.Settings.Add(key, converterTo(value));
                 configuration.Save(ConfigurationSaveMode.Minimal);
+                ConfigurationManager.RefreshSection("appSettings");
             }
         }
 

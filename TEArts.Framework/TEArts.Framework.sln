@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2000
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TEArts.Framework.Extends", "TEArts.Framework.Extends\TEArts.Framework.Extends.csproj", "{EBE64764-9CD0-460E-AEA9-1AEF2C055024}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TEArts.Framework", "TEArts.Framework\TEArts.Framework.csproj", "{404F382F-9D2F-4E63-B9B9-EDF6387F3AC5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TEArts.Framework.Config", "TEArts.Framework.Config\TEArts.Framework.Config.csproj", "{6E01BE75-C0D8-4089-B44B-D13AA6C77C3A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TEArts.Framework.Extends", "TEArts.Framework.Extends\TEArts.Framework.Extends.csproj", "{68048E5A-F13F-4762-94BF-1347D8A38EA2}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TEArts.Framework.Logging", "TEArts.Framework.Logging\TEArts.Framework.Logging.csproj", "{77E18194-AAB5-490E-97AC-512BA424068A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TEArts.Framework.Logging", "TEArts.Framework.Logging\TEArts.Framework.Logging.csproj", "{486716B9-4167-43A0-AD33-D0B635FF37A4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TEArts.Framework.Config", "TEArts.Framework.Config\TEArts.Framework.Config.csproj", "{E3C97C1E-0754-407E-B60A-73BEF4C779C3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,18 +17,22 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{EBE64764-9CD0-460E-AEA9-1AEF2C055024}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EBE64764-9CD0-460E-AEA9-1AEF2C055024}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EBE64764-9CD0-460E-AEA9-1AEF2C055024}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EBE64764-9CD0-460E-AEA9-1AEF2C055024}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6E01BE75-C0D8-4089-B44B-D13AA6C77C3A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6E01BE75-C0D8-4089-B44B-D13AA6C77C3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6E01BE75-C0D8-4089-B44B-D13AA6C77C3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6E01BE75-C0D8-4089-B44B-D13AA6C77C3A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{77E18194-AAB5-490E-97AC-512BA424068A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{77E18194-AAB5-490E-97AC-512BA424068A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{77E18194-AAB5-490E-97AC-512BA424068A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{77E18194-AAB5-490E-97AC-512BA424068A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{404F382F-9D2F-4E63-B9B9-EDF6387F3AC5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{404F382F-9D2F-4E63-B9B9-EDF6387F3AC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{404F382F-9D2F-4E63-B9B9-EDF6387F3AC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{404F382F-9D2F-4E63-B9B9-EDF6387F3AC5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68048E5A-F13F-4762-94BF-1347D8A38EA2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68048E5A-F13F-4762-94BF-1347D8A38EA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68048E5A-F13F-4762-94BF-1347D8A38EA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68048E5A-F13F-4762-94BF-1347D8A38EA2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{486716B9-4167-43A0-AD33-D0B635FF37A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{486716B9-4167-43A0-AD33-D0B635FF37A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{486716B9-4167-43A0-AD33-D0B635FF37A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{486716B9-4167-43A0-AD33-D0B635FF37A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E3C97C1E-0754-407E-B60A-73BEF4C779C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E3C97C1E-0754-407E-B60A-73BEF4C779C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E3C97C1E-0754-407E-B60A-73BEF4C779C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E3C97C1E-0754-407E-B60A-73BEF4C779C3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

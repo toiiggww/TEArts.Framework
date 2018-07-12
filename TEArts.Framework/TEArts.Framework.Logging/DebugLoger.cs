@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Text;
 using System.Reflection;
-using System.Threading;
+using System.Text;
 using TEArts.Framework.Extends;
 
 namespace TEArts.Framework.Logging
@@ -16,9 +15,9 @@ namespace TEArts.Framework.Logging
         void RegistLoger();
     }
     public enum DebugType { Error, AuditSuc, AuditFal, Warning, Info, Debug, FunCall }
-    public abstract class DebugerLoger : MarshalByRefObject, IDebugerLoger
+    public abstract class DebuggerLoger : MarshalByRefObject, IDebugerLoger
     {
-        public DebugerLoger()
+        public DebuggerLoger()
         {
             DebugType = DebugType.Debug;
         }
@@ -64,7 +63,7 @@ namespace TEArts.Framework.Logging
             return sb.ToString();
         }
     }
-    public class ConsoleLoger : DebugerLoger
+    public class ConsoleLoger : DebuggerLoger
     {
         private ConsoleLoger()
         {
@@ -147,7 +146,7 @@ namespace TEArts.Framework.Logging
         }
         public override void RegistLoger()
         {
-            Debuger.Loger.AddLoger("Console", this);
+            DebugLog.Loger.AddLoger("Console", this);
         }
     }
     //public class EventsLoger : DebugerLoger
@@ -188,7 +187,7 @@ namespace TEArts.Framework.Logging
     //        Debuger.Loger.AddLoger("Events", this);
     //    }
     //}
-    public class NetworkLoger : DebugerLoger
+    public class NetworkLoger : DebuggerLoger
     {
         private System.Net.Sockets.Socket mbrSocket;
         public NetworkLoger(System.Net.IPAddress ip, int port, System.Net.Sockets.ProtocolType type)
@@ -203,10 +202,10 @@ namespace TEArts.Framework.Logging
         }
         public override void RegistLoger()
         {
-            Debuger.Loger.AddLoger("Network", this);
+            DebugLog.Loger.AddLoger("Network", this);
         }
     }
-    public class TextFileLoger : DebugerLoger
+    public class TextFileLoger : DebuggerLoger
     {
         public TextFileLoger()
             : this("Application.log")
@@ -231,15 +230,15 @@ namespace TEArts.Framework.Logging
         }
         public override void RegistLoger()
         {
-            Debuger.Loger.AddLoger("TextLoger", this);
+            DebugLog.Loger.AddLoger("TextLoger", this);
         }
     }
-    public class Debuger
+    public class DebugLog
     {
         private static object mbrDebugHandler = new object();
-        private static Debuger mbrInstance;
+        private static DebugLog mbrInstance;
         private Dictionary<string, IDebugerLoger> mbrLogers;
-        private Debuger()
+        private DebugLog()
         {
             mbrLogers = new Dictionary<string, IDebugerLoger>();
         }
@@ -250,13 +249,13 @@ namespace TEArts.Framework.Logging
                 mbrLogers.Add(key, loger);
             }
         }
-        public static Debuger Loger
+        public static DebugLog Loger
         {
             get
             {
                 if (mbrInstance == null)
                 {
-                    mbrInstance = new Debuger();
+                    mbrInstance = new DebugLog();
                 }
                 return mbrInstance;
             }
