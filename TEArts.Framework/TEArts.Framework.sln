@@ -11,28 +11,18 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TEArts.Framework.Logging", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TEArts.Framework.Config", "TEArts.Framework.Config\TEArts.Framework.Config.csproj", "{E3C97C1E-0754-407E-B60A-73BEF4C779C3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TEArts.Framework.Network", "TEArts.Framework.Network\TEArts.Framework.Network.csproj", "{5E2FAC18-E9F1-4531-9A31-4F5104B0971E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TEArts.Framework", "TEArts.Framework\TEArts.Framework.csproj", "{119D2184-3D7E-4CF5-A471-3C8F05A050C7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TEArts.Framework.Collections", "TEArts.Framework.Collections\TEArts.Framework.Collections.csproj", "{001F9A71-973C-454A-BC08-0D0B8DBAF722}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{404F382F-9D2F-4E63-B9B9-EDF6387F3AC5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{404F382F-9D2F-4E63-B9B9-EDF6387F3AC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{404F382F-9D2F-4E63-B9B9-EDF6387F3AC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{404F382F-9D2F-4E63-B9B9-EDF6387F3AC5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{68048E5A-F13F-4762-94BF-1347D8A38EA2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{68048E5A-F13F-4762-94BF-1347D8A38EA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{68048E5A-F13F-4762-94BF-1347D8A38EA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{68048E5A-F13F-4762-94BF-1347D8A38EA2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{486716B9-4167-43A0-AD33-D0B635FF37A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{486716B9-4167-43A0-AD33-D0B635FF37A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{486716B9-4167-43A0-AD33-D0B635FF37A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{486716B9-4167-43A0-AD33-D0B635FF37A4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E3C97C1E-0754-407E-B60A-73BEF4C779C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E3C97C1E-0754-407E-B60A-73BEF4C779C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E3C97C1E-0754-407E-B60A-73BEF4C779C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E3C97C1E-0754-407E-B60A-73BEF4C779C3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
