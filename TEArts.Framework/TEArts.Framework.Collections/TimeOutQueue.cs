@@ -10,35 +10,32 @@ namespace TEArts.Framework.Collections
         private SortedList<DateTime, List<TimedItem<TEArtsType>>> List = new SortedList<DateTime, List<TimedItem<TEArtsType>>>();
         private Timer Timer;
         //public EventHandler<TEArtsType> OnTimeOut;
-        public long Millisecond { get; private set; }
+        public long Millisecond { get; private set; } = 100;
         public DateTime Next { get; private set; }
         public TimeOutQueue() : base()
         {
             Timer = new Timer(x =>
             {
                 DateTime dt = ((DateTime)(x));
-                if (!List.ContainsKey(dt))
+                if (List.TryGetValue(dt, out List<TimedItem<TEArtsType>> t))
                 {
-                    return;
-                }
-                List<TimedItem<TEArtsType>> t = List[dt];
-                foreach (TimedItem<TEArtsType> tt in t)
-                {
-                    if (tt.NextTimer < 0)
+                    foreach (TimedItem<TEArtsType> tt in t)
                     {
-                        tt.Callback(tt.Item);
+                        if (tt.NextTimer <= 0)
+                        {
+                            tt.Callback?.Invoke(tt.Item);
+                        }
+                        else
+                        {
+                            tt.NextTimer -= long.MaxValue;
+                            Add(tt);
+                        }
                     }
-                    else
-                    {
-                        tt.NextTimer -= long.MaxValue;
-                        Add(tt);
-                    }
+                    t.Clear();
+                    List.Remove(dt);
                 }
-                t.Clear();
-                List.Remove(dt);
-                nextTimer();
+                NextTimer();
             }, Next, Timeout.Infinite, Timeout.Infinite);
-            Next = DateTime.MaxValue;
         }
         public TimeOutQueue(long mill) : this()
         {
@@ -46,45 +43,29 @@ namespace TEArts.Framework.Collections
         }
         public TimedItem<TEArtsType> Add(TEArtsType item, Action<TEArtsType> onTimeOut)
         {
-            return Add(item, Millisecond, onTimeOut);
+            return Add(new TimedItem<TEArtsType>(item, DateTime.Now.AddMilliseconds(Millisecond), onTimeOut));
         }
         public TimedItem<TEArtsType> Add(TEArtsType item, long mill, Action<TEArtsType> onTimeOut)
         {
-            TimedItem<TEArtsType> i = new TimedItem<TEArtsType>(Millisecond);
-            return Add(i);
+            return Add(new TimedItem<TEArtsType>(item, DateTime.Now.AddMilliseconds(mill), onTimeOut));
         }
         public TimedItem<TEArtsType> Add(TimedItem<TEArtsType> i)
         {
             if (i.TimeOut <= DateTime.Now)
             {
-                i.ResetTime();
-            }
-            long m = 0;
-            TimeSpan t = (i.TimeOut - DateTime.Now);
-            if (t.TotalMilliseconds > long.MaxValue)
-            {
-                m = long.MaxValue;
-                i.NextTimer = t.TotalMilliseconds - long.MaxValue;
+                i.Callback?.Invoke(i.Item);
             }
             else
             {
-                m = (long)(t.TotalMilliseconds);
-            }
-            List<TimedItem<TEArtsType>> ts = null;
-            lock (List)
-            {
-                if (List.ContainsKey(i.TimeOut))
+                lock (List)
                 {
-                    ts = List[i.TimeOut];
-                }
-                else
-                {
-                    ts = new List<TimedItem<TEArtsType>>();
-                }
-                ts.Add(i);
-                if (Next > i.TimeOut)
-                {
-                    Timer.Change(m, Timeout.Infinite);
+                    if (!List.TryGetValue(i.TimeOut, out List<TimedItem<TEArtsType>> ts))
+                    {
+                        ts = new List<TimedItem<TEArtsType>>();
+                        List.Add(i.TimeOut, ts);
+                    }
+                    ts.Add(i);
+                    NextTimer();
                 }
             }
             return i;
@@ -92,6 +73,10 @@ namespace TEArts.Framework.Collections
 
         public void Remove(TimedItem<TEArtsType> item)
         {
+            if (item == null)
+            {
+                return;
+            }
             lock (List)
             {
                 if (List.ContainsKey(item.TimeOut))
@@ -100,26 +85,32 @@ namespace TEArts.Framework.Collections
                 }
                 if (List[item.TimeOut].Count == 0)
                 {
-                    nextTimer();
+                    List.Remove(item.TimeOut);
+                    NextTimer();
                 }
             }
         }
-        private void nextTimer()
+        public void Clear(bool invoke = false)
+        {
+            List.Clear();
+            if (invoke) { NextTimer(); }
+        }
+        private void NextTimer()
         {
             if (List.Keys.Count > 0)
             {
-                Next = List.Keys.Min();
-                Timer.Change(((long)((Next - DateTime.Now).TotalMilliseconds)), Timeout.Infinite);
+                DateTime min = List.Keys.Min();
+                if (min <= Next || Next <= DateTime.Now)
+                {
+                    Next = min;
+                    long l = Next <= DateTime.Now ? 0 : ((Next - DateTime.Now).TotalMilliseconds > long.MaxValue ? long.MaxValue : ((long)((Next - DateTime.Now).TotalMilliseconds)));
+                    Timer.Change(l, Timeout.Infinite);
+                }
             }
             else
             {
                 Timer.Change(Timeout.Infinite, Timeout.Infinite);
             }
-        }
-        public void Clear()
-        {
-            List.Clear();
-            nextTimer();
         }
         public void Dispose()
         {
@@ -128,14 +119,14 @@ namespace TEArts.Framework.Collections
             List.Clear();
         }
     }
+
+    public class TimeOutQueue : TimeOutQueue<object>
+    {
+
+    }
+
     public class TimedItem<TEArtsType>
     {
-        public TimedItem(double millisecond)
-        {
-            if (millisecond < 0) millisecond = 50;
-            TimeOut = DateTime.Now.AddMilliseconds(millisecond);
-            NextTimer = -1;
-        }
         public TimedItem(TEArtsType value, DateTime timeout, Action<TEArtsType> action)
         {
             Item = value;
@@ -145,11 +136,7 @@ namespace TEArts.Framework.Collections
                 timeout = DateTime.Now.AddMilliseconds(50);
             }
             TimeOut = timeout;
-            NextTimer = -1;
-        }
-        internal void ResetTime()
-        {
-            TimeOut = DateTime.Now.AddMilliseconds(50);
+            NextTimer = (timeout - DateTime.Now).TotalMilliseconds;
         }
         internal double NextTimer { get; set; }
         public TEArtsType Item { get; private set; }

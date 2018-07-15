@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -41,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DebugLoger.cs" />
+    <Compile Include="Log4NetObject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -48,6 +52,10 @@
       <Project>{68048E5A-F13F-4762-94BF-1347D8A38EA2}</Project>
       <Name>TEArts.Framework.Extends</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="log4net.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

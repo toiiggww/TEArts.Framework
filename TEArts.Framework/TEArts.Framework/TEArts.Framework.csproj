@@ -4,15 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{68048E5A-F13F-4762-94BF-1347D8A38EA2}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>TEArts.Framework.Extends</RootNamespace>
-    <AssemblyName>TEArts.Framework.Extends</AssemblyName>
+    <ProjectGuid>{404F382F-9D2F-4E63-B9B9-EDF6387F3AC5}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>TEArts.Framework</RootNamespace>
+    <AssemblyName>TEArts.Framework</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,6 +22,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -40,12 +41,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Extends.Array.cs" />
-    <Compile Include="Extends.Byte.cs" />
-    <Compile Include="Extends.Socket.cs" />
-    <Compile Include="Extends.String.cs" />
-    <Compile Include="Extends.Type.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TEArts.Framework.Config\TEArts.Framework.Config.csproj">
+      <Project>{E3C97C1E-0754-407E-B60A-73BEF4C779C3}</Project>
+      <Name>TEArts.Framework.Config</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TEArts.Framework.Extends\TEArts.Framework.Extends.csproj">
+      <Project>{68048E5A-F13F-4762-94BF-1347D8A38EA2}</Project>
+      <Name>TEArts.Framework.Extends</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TEArts.Framework.Logging\TEArts.Framework.Logging.csproj">
+      <Project>{486716B9-4167-43A0-AD33-D0B635FF37A4}</Project>
+      <Name>TEArts.Framework.Logging</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

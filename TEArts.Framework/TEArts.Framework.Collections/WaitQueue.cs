@@ -21,7 +21,7 @@ namespace TEArts.Framework.Collections
             }
             WaitHandle.Set();
             MaxSize = 0;
-            CancellationTokenSource.CreateLinkedTokenSource(CancelToken).Cancel();
+            //CancellationTokenSource.CreateLinkedTokenSource(CancelToken).Cancel();
         }
 
         public WaitQueue(int max, CancellationToken cancelToken) // : base(max > 0 ? max : 4)
@@ -132,15 +132,14 @@ namespace TEArts.Framework.Collections
             }
             else if (millisecondsTimeout > 0)
             {
-                if (
-                    ((waitEnd - waitStart).TotalMilliseconds) > int.MaxValue ||
-                    -1 == (millisecondsTimeout - (int)((waitEnd - waitStart).TotalMilliseconds)))
+                int waited = ((int)(waitEnd - waitStart).TotalMilliseconds);
+                if (waited > int.MaxValue || waited < 0)
                 {
                     millisecondsTimeout = 0;
                 }
                 else
                 {
-                    millisecondsTimeout -= (int)((waitEnd - waitStart).TotalMilliseconds);
+                    millisecondsTimeout -= waited;
                 }
             }
 
@@ -153,6 +152,17 @@ namespace TEArts.Framework.Collections
                 TryDequeue(out T t);
             }
             WaitHandle.Reset();
+        }
+    }
+
+    public class WaitQueue : WaitQueue<object>
+    {
+        public WaitQueue(CancellationToken cancelToken) : base(cancelToken)
+        {
+        }
+
+        public WaitQueue(int max, CancellationToken cancelToken) : base(max, cancelToken)
+        {
         }
     }
 
